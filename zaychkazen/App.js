@@ -10,7 +10,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 
-import { weading } from './src/components/Pictures/weading.jpg';
+import { wedding } from './src/components/Pictures/wedding.jpg';
 import { Zen } from './src/features/Zen/Zen';
 import { ZenHistory } from './src/features/Zen/ZenHistory';
 import { Timer } from './src/features/timer/Timer';
@@ -63,7 +63,7 @@ export default function App() {
 
   return (
     <ImageBackground
-      source={require('./src/components/Pictures/weading.jpg')}
+      source={require('./src/components/Pictures/wedding.jpg')}
       style={styles.container}>
       {zenSubject ? (
         <Timer
