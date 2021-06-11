@@ -42,7 +42,7 @@ export const ZenHistory = ({ zenHistory, onClear }) => {
 
 const styles = StyleSheet.create({
   historyItem: (status) => ({
-    textDecorationLine: status > 1 ? 'line-through' : '',
+    textDecorationLine: status > 1 ? 'line-through' : 'none',
     fontSize: fontSizes.md,
     color: 'white',
   }),

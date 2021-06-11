@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Platform,
-  Button,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, StyleSheet, Platform, Button, ImageBackground} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from 'react-native-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 
-import { wedding } from './src/components/Pictures/wedding.jpg';
+import { wedding } from './src/components/Pictures/wedding.jpg'
+import { uuidv4 } from './src/utils/uuid';
 import { Zen } from './src/features/Zen/Zen';
 import { ZenHistory } from './src/features/Zen/ZenHistory';
 import { Timer } from './src/features/timer/Timer';
 import { colors } from './src/utils/colors';
 import { spacing } from './src/utils/sizes';
-
-const STATUSES = {
-  COMPLETE: 1,
-  CANCELLED: 2,
-};
 
 export default function App() {
   const [zenSubject, setZenSubject] = useState(null);
@@ -67,14 +56,20 @@ export default function App() {
       style={styles.container}>
       {zenSubject ? (
         <Timer
-          zenSubject={zenSubject}
-          onTimerEnd={() => {
-            addZenHistorySubjectWithStatus(zenSubject, STATUSES.COMPLETE);
-            setZenSubject(null);
-          }}
+          subject={zenSubject}
           clearSubject={() => {
-            addZenHistorySubjectWithStatus(zenSubject, STATUSES.CANCELLED);
-            setZenSubject(null);
+            setZenSubject([
+              ...zenHistory,
+              { subject: zenSubject, status: 0, key: uuidv4() },
+            ]);
+            setFocusSubject(null);
+          }}
+          onTimerEnd={() => {
+            setZenSubject([
+              ...focusHistory,
+              { subject: zenSubject, status: 1, key: uuidv4() },
+            ]);
+            setFocusSubject(null);
           }}
         />
       ) : (
@@ -91,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItem: 'center',
+    alignItems: 'center',
     height: null,
     width: null,
     opacity: 0.85,
