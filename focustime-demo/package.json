@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "*",
-    "expo": "~40.0.0",
+    "expo": "~48.0.0",
     "expo-asset": "~8.2.1",
     "expo-av": "~8.7.0",
     "expo-cli": "^4.5.2",
